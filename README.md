@@ -19,6 +19,10 @@
 - [License](#license)
 - [Thanks :purple\_heart:](#thanks-purple_heart)
 
+If this is the first time to use it, it is recommended to use a rewritten new project [FooocusAPI](https://github.com/mrhan1993/FooocusAPI)
+
+A migration guide is provided [here](./docs/migrate.md).
+
 # :warning: Compatibility warning :warning:
 
 When upgrading from version 3.x to version 4.0, please read the following incompatibility notes:
