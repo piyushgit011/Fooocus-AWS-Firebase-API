@@ -12,9 +12,9 @@ from PIL.PngImagePlugin import PngInfo
 import firebase_admin
 from firebase_admin import credentials, storage
 import time
-cred = credentials.Certificate("/workspace/Virtual AI Influencer Firebase Admin.json")
+cred = credentials.Certificate("/workspace/Virtual AI Character Firebase Admin.json")
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'virtual-ai-influencer.appspot.com'
+    'storageBucket': 'virtual-ai-character.appspot.com'
 })
 
 def convert_to_url(local_file, cloud_file):
