@@ -114,7 +114,7 @@ def get_file_serve_url(filename: str | None) -> str | None:
     if filename is None:
         return None
     # file_path = os.path.join(output_dir, filename)
-    # image_name = f"user/generated_image_{os.urandom(4).hex()}.webp"
+    image_name = f"user/generated_image_{os.urandom(4).hex()}.webp"
     # #cloud_#file_ath = f"user/user_{int(time.time())}.png"
     # url = convert_to_url(file_path,image_name)
     # print(url)
@@ -122,10 +122,10 @@ def get_file_serve_url(filename: str | None) -> str | None:
     # return url
     s3_client = boto3.client('s3', aws_access_key_id="", aws_secret_access_key="")
     BUCKET_NAME = 'designhomes-interiors'
-    FOLDER_NAME = 'users/'
+    # FOLDER_NAME = 'users/'
     file_path = os.path.join(output_dir, filename)
-    image_name = f"generated_image_{os.urandom(4).hex()}.webp"
-    s3_client.upload_file(file_path,BUCKET_NAME,FOLDER_NAME+image_name)
+    # image_name = f"generated_image_{os.urandom(4).hex()}.webp"
+    s3_client.upload_file(file_path,BUCKET_NAME,image_name)
     static_serve_base_url = 'https://designhomes-interiors.s3.us-east-2.amazonaws.com/'
     print(static_serve_base_url)
     print(file_path)
