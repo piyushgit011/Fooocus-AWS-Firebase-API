@@ -120,7 +120,7 @@ def get_file_serve_url(filename: str | None) -> str | None:
     # print(url)
     # #print(file_path)
     # return url
-    s3_client = boto3.client('s3', aws_access_key_id="", aws_secret_access_key="")
+    s3_client = boto3.client('s3')
     BUCKET_NAME = 'designhomes-interiors'
     # FOLDER_NAME = 'users/'
     file_path = os.path.join(output_dir, filename)
