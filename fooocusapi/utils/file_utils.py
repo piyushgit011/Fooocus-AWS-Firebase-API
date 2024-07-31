@@ -8,23 +8,23 @@ import uuid
 import json
 from pathlib import Path
 from PIL.PngImagePlugin import PngInfo
-import boto3
-# import firebase_admin
-# from firebase_admin import credentials, storage
+# import boto3
+import firebase_admin
+from firebase_admin import credentials, storage
 import time
-# cred = credentials.Certificate("/workspace/furniture-ai service account.json")
-# firebase_admin.initialize_app(cred, {
-#     'storageBucket': 'furniture-ai-1aeec.appspot.com'
-# })
+cred = credentials.Certificate("/workspace/Virtual AI Influencer Firebase Admin.json")
+firebase_admin.initialize_app(cred, {
+    'storageBucket': 'virtual-ai-influencer.appspot.com'
+})
 
-# def convert_to_url(local_file, cloud_file):
-#     bucket = storage.bucket()
-#     blob = bucket.blob(cloud_file)
-#     blob.upload_from_filename(local_file)
-#     # Make the blob publicly viewable
-#     blob.make_public()
-#     # Return the public URL
-#     return blob.public_url
+def convert_to_url(local_file, cloud_file):
+    bucket = storage.bucket()
+    blob = bucket.blob(cloud_file)
+    blob.upload_from_filename(local_file)
+    # Make the blob publicly viewable
+    blob.make_public()
+    # Return the public URL
+    return blob.public_url
 
 output_dir = os.path.abspath(os.path.join(
    os.path.dirname(__file__), '../..', 'outputs', 'files'))
@@ -113,20 +113,20 @@ def output_file_to_bytesimg(filename: str | None) -> bytes | None:
 def get_file_serve_url(filename: str | None) -> str | None:
     if filename is None:
         return None
-    # file_path = os.path.join(output_dir, filename)
+    file_path = os.path.join(output_dir, filename)
     image_name = f"user/generated_image_{os.urandom(4).hex()}.webp"
     # #cloud_#file_ath = f"user/user_{int(time.time())}.png"
-    # url = convert_to_url(file_path,image_name)
-    # print(url)
-    # #print(file_path)
-    # return url
-    s3_client = boto3.client('s3')
-    BUCKET_NAME = 'designhomes-interiors'
-    # FOLDER_NAME = 'users/'
-    file_path = os.path.join(output_dir, filename)
-    # image_name = f"generated_image_{os.urandom(4).hex()}.webp"
-    s3_client.upload_file(file_path,BUCKET_NAME,image_name)
-    static_serve_base_url = 'https://designhomes-interiors.s3.us-east-2.amazonaws.com/'
-    print(static_serve_base_url)
-    print(file_path)
-    return static_serve_base_url + image_name
+    url = convert_to_url(file_path,image_name)
+    print(url)
+    #print(file_path)
+    return url
+    # s3_client = boto3.client('s3')
+    # BUCKET_NAME = 'designhomes-interiors'
+    # # FOLDER_NAME = 'users/'
+    # file_path = os.path.join(output_dir, filename)
+    # # image_name = f"generated_image_{os.urandom(4).hex()}.webp"
+    # s3_client.upload_file(file_path,BUCKET_NAME,image_name)
+    # static_serve_base_url = 'https://designhomes-interiors.s3.us-east-2.amazonaws.com/'
+    # print(static_serve_base_url)
+    # print(file_path)
+    # return static_serve_base_url + image_name
