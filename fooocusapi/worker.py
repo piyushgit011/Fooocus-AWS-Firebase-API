@@ -13,7 +13,7 @@ import torch
 import ldm_patched.modules.model_management
 import modules.patch
 import modules.config
-from extras.inpaint_mask import SAMOptions, generate_mask_from_image
+# from extras.inpaint_mask import SAMOptions, generate_mask_from_image
 from fooocusapi.models.common.image_meta import image_parse
 from fooocusapi.models.common.task import (
     GenerationFinishReason,
