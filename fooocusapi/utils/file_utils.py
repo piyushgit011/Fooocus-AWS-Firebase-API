@@ -16,23 +16,10 @@ import os
 from pathlib import Path
 import numpy as np
 from PIL import Image
-# import boto3
-import firebase_admin
-from firebase_admin import credentials, storage
+import boto3
 import time
-cred = credentials.Certificate("/workspace/Virtual AI Influencer Firebase Admin.json")
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'virtual-ai-influencer.appspot.com'
-})
 
-def convert_to_url(local_file, cloud_file):
-    bucket = storage.bucket()
-    blob = bucket.blob(cloud_file)
-    blob.upload_from_filename(local_file)
-    # Make the blob publicly viewable
-    blob.make_public()
-    # Return the public URL
-    return blob.public_url
+
 
 from fooocusapi.utils.logger import logger
 
@@ -139,18 +126,14 @@ def get_file_serve_url(filename: str | None) -> str | None:
         return None
     file_path = os.path.join(output_dir, filename)
     image_name = f"users_img/generated_image_{os.urandom(4).hex()}.webp"
-    # #cloud_#file_ath = f"user/user_{int(time.time())}.png"
-    url = convert_to_url(file_path,image_name)
-    print(url)
-    #print(file_path)
-    return url
-    # s3_client = boto3.client('s3')
-    # BUCKET_NAME = 'aipicslibrary'
-    # # FOLDER_NAME = 'users/'
+   
+    s3_client = boto3.client('s3')
+    BUCKET_NAME = 'aipicslibrary'
+    FOLDER_NAME = 'users/'
     # file_path = os.path.join(output_dir, filename)
-    # # image_name = f"generated_image_{os.urandom(4).hex()}.webp"
-    # s3_client.upload_file(file_path,BUCKET_NAME,image_name)
-    # static_serve_base_url = 'https://assets.virtualfantasy.ai/'
+    # image_name = f"generated_image_{os.urandom(4).hex()}.webp"
+    s3_client.upload_file(file_path,BUCKET_NAME,image_name)
+    static_serve_base_url = 'https://example/'
     # print(static_serve_base_url)
     # print(file_path)
-    # return static_serve_base_url + image_name
+    return static_serve_base_url + image_name
